@@ -107,7 +107,11 @@ Route::get('/admin/reviews/view-review/{id}',[AdminController::class,'viewReview
 
 Route::get('/admin/reviews/edit-review/{id}',[AdminController::class,'editReview']);
 
-Route::post('/admin/reviews/save-edit-user/{id}',[AdminController::class,'saveEditReview']);
+Route::post('/admin/reviews/save-edit-review/{id}',[AdminController::class,'saveEditReview']);
+
+/* DELETE REVIEW */
+
+Route::get('/admin/reviews/{id}',[AdminController::class,'deleteReview']);
 
 
 

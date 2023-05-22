@@ -104,7 +104,7 @@
 
         <div class="container" id="allbands">
 
-            <a href="{{url('admin/reviews/add-review')}}" class="btn btn-outline-primary mt-2 mb-4">Add a review</a>
+            <a href="{{url('admin/reviews/add-review')}}" class="btn btn-lg btn-outline-primary mt-2 mb-4">Add a review</a>
 
             <div class="row">
 
@@ -153,7 +153,7 @@
                                 {{--DELETE BAND --}}
 
 
-                                <td><button class="btn btn-outline-danger delete" data-id={{'/admin/bands/'}}
+                                <td><button class="btn btn-outline-danger delete" data-id={{'/admin/bands/'.$reviews->id}}
                                         type="submit">DELETE</button></td>
 
 
@@ -200,8 +200,8 @@
                     e.preventDefault();
                     const id = $(this).attr('data-id');
                     swal({
-                        title: 'Are you sure you want to delete this band?',
-                        text: "If you are, delete this band !",
+                        title: 'Are you sure you want to delete this review?',
+                        text: "If you are, delete this review !",
                         icon: 'warning',
                         buttons: true,
                         dangerMode: true,

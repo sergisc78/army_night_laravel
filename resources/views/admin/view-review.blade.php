@@ -107,28 +107,32 @@
 
         <div class="container" id="allbands">
 
-            <a href="{{url('admin/reviews/')}}" class="btn btn-outline-primary mt-2 mb-4">Back</a>
+            <a href="{{url('admin/reviews/')}}" class="btn btn-lg btn-outline-primary mt-2 mb-4">Back</a>
 
 
             @foreach ($review as $id=>$reviews)
 
 
-            <h1 class="band_name_band_title text-center">{{$reviews->band_name}}  - {{$reviews->album_title}} ({{$reviews->album_year}}) </h1>
+            <h1 class="band_name_band_title text-center">{{$reviews->band_name}} - {{$reviews->album_title}}
+                ({{$reviews->album_year}}) </h1>
 
             <p class="review-genre text-center">Style : {{$reviews->genre_name}}</p>
 
-            <p class="review-creation text-center">Review data: {{$reviews->created_at}}</p>
 
-            
+            <p class="review-creation text-center">Review data: {{$reviews->updated_at}}</p>
 
-            <img src="{{ url('albumImages/'.$reviews->album_image)}}" alt="album_image" class=" album-cover" >
+
+
+            <img src="{{ url('albumImages/'.$reviews->album_image)}}" alt="album_image" class=" album-cover">
 
             <p class="review text-justify">{{$reviews->album_review}}</p>
 
-            <p class="review-link text-center"><a class="youtube-link" href="{{$reviews->album_link}}">Dou you want to listen this album? Youtube album link </a></p>
+            <p class="review-link text-center"><a class="youtube-link" href="{{$reviews->album_link}}">Dou you want to
+                    listen this album? Youtube album link </a></p>
 
 
             @endforeach
+
 
 
 

@@ -255,34 +255,42 @@ class AdminController extends Controller
 
     /******************************************  REVIEWS SECTION **********************************/
 
+
+    // GET ALL REVIEWS
+
     public function getReviews()
     {
 
-        $review= DB::table('reviews')
-        ->join('genres','genres.id','=','reviews.genre_id')
-        ->join('bands','bands.id','=','reviews.band_id')
-        ->select('reviews.*','genres.genre_name','bands.band_name')
-        ->get();
-        
-        return view('admin.reviews',compact('review'));
+        $review = DB::table('reviews')
+            ->join('genres', 'genres.id', '=', 'reviews.genre_id')
+            ->join('bands', 'bands.id', '=', 'reviews.band_id')
+            ->select('reviews.*', 'genres.genre_name', 'bands.band_name')
+            ->get();
+
+        return view('admin.reviews', compact('review'));
     }
+
+    // SHOW DATA IN SELECT INPUTS
 
     public function addReviewForm()
-    
+
     {
 
-        $band=Band::all();
-        $genre=Genre::all();
-        return view('admin.add-review',compact('band', 'genre'));
+        $band = Band::all();
+        $genre = Genre::all();
+        return view('admin.add-review', compact('band', 'genre'));
     }
 
-    public function addReview(Request $request){
+    // ADD NEW REVIEW
 
-        $review=new Review();
-        
-        
-        $review->genre_id=$request->genre_name;
-        $review->band_id=$request->band_name;
+    public function addReview(Request $request)
+    {
+
+        $review = new Review();
+
+
+        $review->genre_id = $request->genre_name;
+        $review->band_id = $request->band_name;
         $review->album_title = $request->album_title;
 
         //ADD IMAGE
@@ -292,54 +300,97 @@ class AdminController extends Controller
         $request->album_image->move('albumImages', $imageName);
         $review->album_image = $imageName;
 
-        
-        $review->album_year=$request->album_year;
-        $review->album_link=$request->album_link;
-        $review->album_review=$request->album_review;
 
-        
-        
+        $review->album_year = $request->album_year;
+        $review->album_link = $request->album_link;
+        $review->album_review = $request->album_review;
+
+
+
         $review->save();
-        
+
 
         return redirect()->back()->with('message', 'Review added successfully');
-
-
     }
 
-    public function viewReview($id){
+    // SHOW REVIEW BY ID 
 
-        
+    public function viewReview($id)
+    {
 
-        $review= DB::table('reviews')
-        ->join('genres','genres.id','=','reviews.genre_id')
-        ->join('bands','bands.id','=','reviews.band_id')
-        ->select('reviews.*','genres.genre_name','bands.band_name')
-        ->where('reviews.id', $id)
-        ->get();
-        
-       
+        $review = DB::table('reviews')
+            ->join('genres', 'genres.id', '=', 'reviews.genre_id')
+            ->join('bands', 'bands.id', '=', 'reviews.band_id')
+            ->select('reviews.*', 'genres.genre_name', 'bands.band_name')
+            ->where('reviews.id', $id)
+            ->get();
 
-        return view ('admin.view-review',compact('review'));
+
+
+        return view('admin.view-review', compact('review'));
     }
 
-    public function editReview($id){
+    // SHOW DATA IN INPUTS
 
-        
+    public function editReview($id)
+    {
 
-        $review= DB::table('reviews')
-        ->join('genres','genres.id','=','reviews.genre_id')
-        ->join('bands','bands.id','=','reviews.band_id')
-        ->select('reviews.*','genres.genre_name','bands.band_name')
-        ->where('reviews.id', $id)
-        ->get();
-        
-       
+        $review = Review::find($id);
 
-        return view ('admin.edit-review',compact('review'));
+        $band = Band::all();
+        $genre = Genre::all();
+
+
+
+        return view('admin.edit-review', compact('review', 'band', 'genre'));
     }
 
-    public function saveEditReview(Request $request,$id){
 
+    // EDIT REVIEW
+
+    public function saveEditReview(Request $request, $id)
+    {
+
+
+        // REVIEW DATA 
+        $review = Review::find($id);
+
+        $review->album_title = $request->album_title;
+
+        $review->genre_id = $request->genre_name;
+
+        $review->band_id = $request->band_name;
+
+        $review->album_year = $request->album_year;
+
+        $review->album_link = $request->album_link;
+
+        $review->album_review = $request->album_review;
+
+        // IF THERE IS A NEW IMAGE,UPDATE IT 
+
+        $image = $request->album_image;
+        if ($image) {
+
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $request->album_image->move('albumImages', $imageName);
+            $review->album_image = $imageName;
+        }
+
+
+        $review->save();
+
+
+        return redirect()->back()->with('message', 'Review updated successfully');
+    }
+
+    //DELETE REVIEW
+
+    public function deleteReview($id)
+    {
+
+        Review::find($id)->delete();
+
+        return redirect()->back()->with('message', 'Review deleted successfully');
     }
 }

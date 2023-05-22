@@ -5,24 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-     @foreach ($review as $id=>$reviews)
-    <title>Army of the night- {{$reviews->band_name}} ({{$reviews->album_title}}) </title>
-    @endforeach
-
-    <!-- JQUERY -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- BOOTSWATCH-->
-
+    <title>Army of the Night - Add Review </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css"
         integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
 
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -33,38 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
-    <!-- CSS STYLES-->
     <link rel="stylesheet" href="/css/styles.css">
-
-    <!--DATATABLES CSS-->
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-    <style>
-        table thead {
-            background: #373B44;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #4286f4, #373B44);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #4286f4, #373B44);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-            margin-top: 100px;
-        }
-
-        #table_filter {
-            margin-bottom: 20px;
-        }
-
-        .sorting {
-            width: 160px;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -72,7 +28,7 @@
     <div class="bs-component">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand " href="{{url('admin')}}">Army of the night</a>
+                <a class="navbar-brand " href="#">Army of the night</a>
 
 
                 <div class=" d-flex justify-content-between align-items-center " id="navbarColor02">
@@ -103,49 +59,108 @@
 
 
 
+        <div class="container text-center">
+
+            <a href="{{url('admin/reviews/')}}" class="btn btn-lg btn-outline-primary mt-2 mb-4">Back</a>
+
+            <div class="shadow p-3 mb-5 mt-4 rounded">
+
+                <h1 class="text-center add mt-5" style="font-size:40px">Edit Album - <br>{{$review->album_title}} </h1>
+
+                <hr class="mt-4" style="background-color: whitesmoke">
+
+                @if (session()->has('message'))
 
 
-        <div class="container" id="allbands">
-
-            <a href="{{url('admin/reviews/')}}" class="btn btn-outline-primary mt-2 mb-4">Back</a>
-
-
-            @foreach ($review as $id=>$reviews)
-
-
-            <h1 class="band_name_band_title text-center">{{$reviews->band_name}}  - {{$reviews->album_title}} ({{$reviews->album_year}}) </h1>
-
-            <p class="review-genre text-center">Style : {{$reviews->genre_name}}</p>
-
-            <p class="review-creation text-center">Review data: {{$reviews->created_at}}</p>
-
-            
-
-            <img src="{{ url('albumImages/'.$reviews->album_image)}}" alt="album_image" class=" album-cover" >
-
-            <p class="review text-justify">{{$reviews->album_review}}</p>
-
-            <p class="review-link text-center"><a class="youtube-link" href="{{$reviews->album_link}}">Dou you want to listen this album? Youtube album link </a></p>
-
-
-            @endforeach
+                <div class="alert alert-dismissible alert-success text-center" style="style="
+                    margin-top:150px;width:370px;margin-left: auto;margin-right: 40px;font-size:18px;font-family:
+                    Montserrat, sans-serif;">
+                    {{session()->get('message')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" style="float:end">
+                        X
+                    </button>
+                </div>
 
 
 
+                @endif
+
+                <form action="{{url('admin/reviews/save-edit-review/'.$review->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+
+                    {{-- SELECT STYLE --}}
+
+                    <div class="mt-5">
+                        <label for="genre_name">Style (Select style once again !)</label>
+                        <br>
+
+                        <select name="genre_name" id="select" style="width: 300px" class="custom-select">
+                            <option> -- Select Style-- </option>
+                            @foreach ($genre as $genres)
+                            <option value="{{$genres->id}}">{{$genres->genre_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- SELECT BAND --}}
+                    
+
+                    <div class="mt-5">
+                        <label for="name">Band (Select band once again !)</label>
+                        <br>
+                        <select name="band_name" id="select" style="width: 300px" class="custom-select">
+                            <option> -- Select Band -- </option>
+                            @foreach ($band as $bands)
+                            <option value="{{$bands->id}}">{{$bands->band_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mt-5">
+                        <label for="name">Album</label>
+                        <input type="text" name="album_title" id="inputs" value="{{$review->album_title}}"
+                            placeholder="Type a name" style="color:black" required>
+                    </div>
+
+                    <div class="mt-5">
+                        <label for="name">Year creation</label>
+                        <input type="text" name="album_year" id="inputs" value="{{$review->album_year}}"
+                            placeholder="Type a year" style="color:black" required>
+                    </div>
+
+                    <div class="mt-5">
+                        <label for="name">Internet link</label>
+                        <input type="text" name="album_link" id="inputs" value="{{$review->album_link}}"
+                            placeholder="Paste the link" style="color:black" required>
+                    </div>
+
+                    <div class="mt-5">
+                        <label for="name">Cover</label>
+                        @if (isset($review->album_image))
+                        <br>
+                        <img class="album-cover" src="{{url('albumImages/'.$review->album_image)}}" alt="album_image"
+                            width="150px" id="album_image_file">
+                        @endif
+                        <br>
+                        <input type="file" name="album_image" id="band_image">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="" class="form-label">Review</label>
+                        <textarea class="form-control" name="album_review" id=""
+                            rows="30">{{$review->album_review}}</textarea>
+                    </div>
+
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-outline-success btn-add mt-4" type="button">Edit
+                            Album</button>
+                    </div>
+
+
+                </form>
+            </div>
         </div>
+    </div>
 
-        <!-- BOOTSTRAP JS-->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
-
-
-
-
-
-
-
-</body>
-
-</html>
+    </div>

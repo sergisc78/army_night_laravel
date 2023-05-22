@@ -57,9 +57,11 @@
             </div>
         </nav>
 
-       <a class="btn btn-outline-primary" href="{{url('admin/genres')}}">Back</a>
+      
 
         <div class="container text-center">
+
+            <a class="btn btn-lg btn-outline-primary mt-4" href="{{url('admin/genres')}}">Back</a>
             <div class="shadow p-3 mb-5 mt-4 rounded">
                 <h1 class="text-center add mt-5"style="font-size:40px">Edit Genre</h1>
             <hr class="mt-4" style="background-color: whitesmoke">

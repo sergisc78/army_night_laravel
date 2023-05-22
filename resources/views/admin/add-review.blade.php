@@ -61,6 +61,8 @@
 
         <div class="container text-center">
 
+            <a href="{{url('admin/reviews/')}}" class="btn btn-outline-primary mt-2 mb-4">Back</a>
+
             <div class="shadow p-3 mb-5 mt-4 rounded">
                 <h1 class="text-center add mt-5" style="font-size:40px">Add a review</h1>
                 <hr class="mt-4" style="background-color: whitesmoke">
@@ -121,7 +123,7 @@
                    
 
                     <div class="mt-5">
-                        <label for="name">Year creation</label>
+                        <label for="name">Release Year</label>
                         <input type="text" name="album_year" id="inputs" placeholder="Type a year" style="color:black"
                             required>
                     </div>
@@ -140,7 +142,7 @@
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="" class="form-label">Review</label>
-                        <textarea class="form-control" name="album_review" id="" rows="3"></textarea>
+                        <textarea class="form-control" name="album_review" id="" rows="30"></textarea>
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-outline-success btn-add mt-4" type="button">Add
