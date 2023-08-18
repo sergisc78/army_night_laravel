@@ -1,0 +1,143 @@
+body {
+    background: #232526;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* NAVBAR */
+
+.navbar-brand {
+    font-size: 45px;
+    font-family: 'Playfair Display', serif;
+    margin-left: 4px;
+
+}
+
+.navbar-nav,
+.btns-login-register {
+    font-size: 20px;
+    margin-left: 15px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.bs-component {
+    height: 150rem;
+}
+
+/* ADD BAND (CREATE-BAND.BLADE.PHP) */
+
+.add {
+    font-size: 25px;
+    margin-left: 15px;
+    font-family: 'Montserrat', sans-serif
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+
+
+}
+
+#inputs,
+#select {
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-add {
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    width: 60%;
+}
+
+.shadow {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    max-width: 500px;
+    margin: auto;
+}
+
+
+/* SHOW BANDS (BANDS.BLADE.PHP) */
+tr {
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+td {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.delete {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    display: block;
+}
+
+.edit {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    display: block;
+    width: 80px;
+
+
+}
+
+#band_image_file {
+    margin: auto;
+    display: block;
+}
+
+/* VIEW REVIEW*/
+
+.band_name_band_title {
+    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.album-cover {
+    display: block;
+    margin: 0px auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 300px;
+
+}
+.review{
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
+.review-link{
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+}
+.youtube-link{
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+    text-align: center;
+}
+.review-creation,.review-genre {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 15px;
+}
+
+.dashboard-title{
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 50px;
+}
+
